@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 const PORT = 3000;
 
 app.listen(PORT, () => {
-    console.log(`AfroFlame running on http://localhost:${PORT}`);
+    console.log(`AfroFlame running on ${PORT}`);
 });
 
 app.post("/api/reservations", (req, res) => {
