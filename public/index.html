@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AfroFlame Kitchen | Home</title>
+
+  <style>
+    /*GLOBAL STYLE*/
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    /*NAVBAR*/
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: #000;
+      border-bottom: 2px solid #ff7a00;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ff7a00;
+      letter-spacing: 1px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ff7a00;
+    }
+
+    /* HERO SECTION*/
+    .hero {
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(hero.png);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+    }
+
+    .hero-content{
+        animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from{opacity: 0; transform: translateY(20px);}
+        to{opacity: 1; transform: translateY(0);}
+    }
+
+    .hero h1 {
+      font-size: 50px;
+      color: #ff7a00;
+      margin: 0;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #ccc;
+      margin-top: 10px;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 12px 25px;
+      border: none;
+      background-color: #ff7a00;
+      color: black;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: white;
+      color: black;
+    }
+
+    /*About*/
+            .about{
+                padding: 100px 80px;
+                text-align: center;
+            }
+
+            .about h2{
+                color: #ff9800;
+                font-size: 45px;
+                margin-bottom: 20px;
+            }
+
+            .about p{
+                max-width: 850px;
+                margin: auto;
+                color: #ccc;
+                line-height: 1.9;
+                font-size: 18px;
+            }
+
+
+    /*FOOTER*/
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #222;
+      color: #777;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <div class="logo">AfroFlame Kitchen</div>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="reservation.html">Reservation</a>
+      <a href="login.html">Login</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Welcome to AfroFlame</h1>
+    <p>Authentic South African flavours with a modern Afro-fusion experience</p>
+
+    <button class="btn" onclick="goToMenu()">View Menu</button>
+  </div>
+
+  <!--Aboout-->
+  <section class="about" id="about">
+        <h2>Our Story</h2>
+
+        <p>
+            AfroFlame Kitchen celebrates South Africa's rich food heritage.
+            Inspired by townshit culture, family gathering, braai traditions, 
+            and the spirit of Ubuntu, we bring authentic flavours to every play.
+            Our mission is to share the warmth, diversity, and vibrant taste of Mzansi with every customer.
+        </p>
+    </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 AfroFlame Kitchen | All Rights Reserved
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    function goToMenu() {
+      window.location.href = "menu.html";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body style="background:#000;color:#fff;text-align:center;font-family:Arial;">
+
+<h2 style="color:#ff9800;">Login</h2>
+
+<input id="email" placeholder="Email"><br><br>
+<input id="password" type="password" placeholder="Password"><br><br>
+
+<button onclick="login()">Login</button>
+
+<script>
+function login() {
+  fetch("http://localhost:3000/api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: document.getElementById("email").value,
+      password: document.getElementById("password").value
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert(data.message);
+    localStorage.setItem("user", JSON.stringify(data.user));
+    window.location.href = "index.html";
+  });
+}
+</script>
+
+</body>
+</html>

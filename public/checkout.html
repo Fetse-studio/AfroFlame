@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AfroFlame | Checkout</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #000;
+      color: #fff;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 30px;
+      border-bottom: 2px solid #ff7a00;
+    }
+
+    .logo {
+      color: #ff7a00;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .nav-links a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: #ff7a00;
+    }
+
+    /* CONTAINER */
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .box {
+      background: #111;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #222;
+    }
+
+    h2 {
+      color: #ff7a00;
+    }
+
+    /* CART ITEMS */
+    .item {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #222;
+      padding: 10px 0;
+    }
+
+    /* FORM */
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #ff7a00;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: white;
+    }
+
+    .total {
+      color: #ff7a00;
+      font-size: 20px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <div class="navbar">
+    <div class="logo">AfroFlame Kitchen</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="checkout.html">Checkout</a>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="container">
+
+    <!-- LEFT: CART SUMMARY -->
+    <div class="box">
+      <h2>🛒 Order Summary</h2>
+      <div id="cartItems"></div>
+      <div class="total" id="total"></div>
+    </div>
+
+    <!-- RIGHT: CUSTOMER DETAILS -->
+    <div class="box">
+      <h2>Customer Details</h2>
+
+      <input type="text" id="name" placeholder="Full Name">
+      <input type="text" id="phone" placeholder="Phone Number">
+      <input type="text" id="address" placeholder="Delivery Address">
+
+      <button onclick="placeOrder()">Place Order</button>
+    </div>
+
+  </div>
+
+  <!-- JS -->
+  <script>
+    let cart = JSON.parse(localStorage.getItem("afroflameCart")) || [];
+
+    function loadCart() {
+      let container = document.getElementById("cartItems");
+      let totalBox = document.getElementById("total");
+
+      let total = 0;
+      container.innerHTML = "";
+
+      if (cart.length === 0) {
+        container.innerHTML = "<p>Your cart is empty.</p>";
+        totalBox.innerHTML = "";
+        return;
+      }
+
+      cart.forEach(item => {
+        total += item.price;
+
+        container.innerHTML += `
+          <div class="item">
+            <span>${item.name}</span>
+            <span>R${item.price}</span>
+          </div>
+        `;
+      });
+
+      totalBox.innerHTML = "Total: R" + total;
+    }
+
+    function placeOrder() {
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let address = document.getElementById("address").value;
+
+  if (!name || !phone || !address) {
+    alert("Please fill in all details!");
+    return;
+  }
+
+  if (cart.length === 0) {
+    alert("Cart is empty!");
+    return;
+  }
+
+  let orderData = {
+    customer: { name, phone, address },
+    items: cart,
+    total: cart.reduce((sum, item) => sum + item.price, 0)
+  };
+
+  fetch("http://localhost:3000/api/orders", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(orderData)
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("🎉 Order placed successfully!");
+    
+    localStorage.removeItem("afroflameCart");
+
+    window.location.href = "index.html";
+  })
+  .catch(err => {
+    console.log(err);
+    alert("❌ Failed to place order");
+  });
+}
+
+    loadCart();
+  </script>
+
+</body>
+</html>

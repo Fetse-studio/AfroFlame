@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reservation - AfroFlame</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #000;
+      color: white;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      background: #111;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #222;
+    }
+
+    h2 {
+      color: #ff9800;
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #ff9800;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: white;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>Book a Table</h2>
+
+  <input id="name" placeholder="Full Name">
+  <input id="phone" placeholder="Phone Number">
+  <input type="date" id="date">
+  <input type="time" id="time">
+  <input type="number" id="guests" placeholder="Number of Guests">
+
+  <button onclick="bookTable()">Reserve</button>
+</div>
+
+<script>
+function bookTable() {
+  const data = {
+    name: document.getElementById("name").value,
+    phone: document.getElementById("phone").value,
+    date: document.getElementById("date").value,
+    time: document.getElementById("time").value,
+    guests: document.getElementById("guests").value
+  };
+
+  if (!data.name || !data.phone || !data.date || !data.time || !data.guests) {
+    alert("Please fill in all fields!");
+    return;
+  }
+
+  fetch("http://localhost:3000/api/reservations", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(() => {
+    alert("Reservation successful!");
+    window.location.href = "index.html";
+  });
+}
+</script>
+
+</body>
+</html>

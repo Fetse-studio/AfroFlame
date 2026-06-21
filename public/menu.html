@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AfroFlame Kitchen | Menu</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            font-family: Arial, sans-serif;
+            background:#111;
+            color: white;
+        }
+
+        /*Navigation Bar*/
+        header{
+            background: #000;
+            padding: 20px 80px;
+        }
+
+        nav{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo{
+            font-size: 32px;
+            font-weight: 700;
+            color: #ff9800;
+        }
+
+        nav ul{
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: 30px;
+        }
+
+        nav ul li{
+            margin-left: 0;
+        }
+
+        nav ul li a{
+                color: white;
+                text-decoration: none;
+            }
+
+        nav ul li a:hover{
+            color: #ff9800;
+        }
+
+        /*Page Title*/
+        .page-title{
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .page-title h1{
+            font-size: 50px;
+            color: #ff9800;
+        }
+
+        .page-title p{
+            color: #ccc;
+            margin-top: 10px;
+        }
+
+       /*Menu grid*/
+.menu-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  padding: 20px 40px;
+}
+
+/*Food cart*/
+.card {
+  background-color: #111;
+  border: 1px solid #222;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #ff7a00;
+}
+
+.card img {
+  width: 100%;
+  height: 180px;          
+  object-fit: cover;      
+  display: block;
+}
+
+/*CONTENT*/
+
+        .card-content{
+            padding: 15px;
+        }
+
+        .card-content h3{
+            color: #ff9800;
+        }
+
+        .card-content p{
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .price{
+            font-size: 22px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .add-btn{
+            width: 100%;
+            padding: 12px;
+            background: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .add-btn:hover{
+            background: #e68900;
+        }
+
+        /*Cart Counter*/
+        .cart-counter{
+            background: #ff9800;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 8px;
+            font-size: 12px;
+            margin-left: 8px;            
+        }
+
+        footer{
+            text-align: center;
+            padding: 30px;
+            background: black;
+            color: #999;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px){
+            header{
+                padding: 20px;
+            }
+            nav{
+                flex-direction: column;
+            }
+            nav ul{
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .menu-grid{
+                padding: 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <div class="logo">AfroFlame Kitchen</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
+</header>
+<section class="page-title">
+    <h1>Our Menu</h1>
+    <p>Authentic South African favourites made with love.</p>
+</section>
+
+<div style="padding:20px; text-align:center;">
+  <h2 style="color:#ff9800;">Your Cart</h2>
+  <div id="cartBox" style="max-width:500px;margin:auto;text-align:left;"></div>
+</div>
+
+<section class="menu-grid">
+    <!--Menu items will be dynamically inserted here-->
+    <!--Main-->
+    <!--Shisa Nyama-->
+    <div class="menu-card">
+        <img src="Braai.png" alt="Shia Nyama">
+        <div class="card-content">
+            <h3>Shisa Nyama</h3>
+            <p>Flame grilled braaied meat served with pap and chakalaka.</p>
+            <div class="price">R120</div>
+            <button class="add-btn" onclick="addToCart('Shisa Nyama',120)">Add to Cart</button>
+        </div>
+    </div>
+
+    <!--Kota-->
+    <div class="menu-card">
+        <img src="Kota.png">
+        <div class="card-content">
+            <h3>Kota</h3>
+            <p>A quarter loaf filled with your choice of meat, fries, cheese and sauce.</p>
+            <div class="price">R50</div>
+            <button class="add-btn" onclick="addToCart('Kota',50)">Add to Cart</button>
+        </div>
+    </div>
+
+    <!--Boerewors Roll-->
+    <div class="menu-card">
+        <img src="Boerewors.jpg">
+        <div class="card-content">
+            <h3>Boerewors Roll</h3>
+            <p>Traditional grilled boereowors roll</p>
+            <div class="price">R45</div>
+            <button class="add-btn" onclick="addToCart('Boerewors Roll',45)">Add to Cart</button>
+        </div>
+    </div>
+
+    <!--Dessert-->
+    <!--Malva-->
+    <div class="'menu-card">
+        <img src="Malva.png">
+        <div class="'card-container">
+            <h3>Malva Pudding</h3>
+            <p>Classic South African dessert</p>
+            <div class="price">R55</div>
+            <button class="add-btn" onclick="addToCart('Malva Pudding',55)">Add to Cart</button>
+        </div>
+    </div>
+
+     <!--Ice Cream-->
+    <div class="'menu-card">
+        <img src="Ice-cream.png">
+        <div class="'card-container">
+            <h3>Ice Cream</h3>
+            <p>Vanilla ice cream with chocolate sauce</p>
+            <div class="price">R30</div>
+            <button class="add-btn" onclick="addToCart('Ice Cream',30)">Add to Cart</button>
+        </div>
+    </div>
+
+    <!--Drinks-->
+     <!--Soft Drink-->
+    <div class="'menu-card">
+        <img src="Soft-drink.png">
+        <div class="'card-container">
+            <h3>Soft Drink</h3>
+            <p>Cold refreshing soft drink</p>
+            <div class="price">R20</div>
+            <button class="add-btn" onclick="addToCart('Soft Drink',20)">Add to Cart</button>
+        </div>
+    </div>
+
+     <!--Fruit Drink-->
+    <div class="'menu-card">
+        <img src="fruit_juice.png">
+        <div class="'card-container">
+            <h3>Fruit Drinl</h3>
+            <p>Fresh;y squeezed mixed fruit juice</p>
+            <div class="price">R25</div>
+            <button class="add-btn" onclick="addToCart('Fruit Juice',25)">Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+
+<footer>
+    <p>&copy; 2026 AfroFlame Kitchen | Proudly South African</p>
+</footer>
+
+<!--JavaScript-->
+<script>
+    // LOAD CART FROM STORAGE
+
+  let cart = JSON.parse(localStorage.getItem("afroflameCart")) || [];
+
+  function saveCart() {
+    localStorage.setItem("afroflameCart", JSON.stringify(cart));
+  }
+
+  function updateCartCount() {
+    document.getElementById("cartCount").innerText = cart.length;
+  }
+
+  updateCartCount();
+
+// ADD TO CART
+  
+  function addToCart(itemName, price) {
+    const item = {
+      name: itemName,
+      price: price
+    };
+
+    cart.push(item);
+    saveCart();
+    updateCartCount();
+
+    alert(itemName + " added to cart!");
+    renderCart();
+  }
+
+// REMOVE ITEM
+  
+  function removeItem(index) {
+    cart.splice(index, 1);
+    saveCart();
+    updateCartCount();
+    renderCart();
+  }
+
+  // RENDER CART
+  
+  function renderCart() {
+    const cartBox = document.getElementById("cartBox");
+
+    if (!cartBox) return;
+
+    let total = 0;
+
+    cartBox.innerHTML = "";
+
+    cart.forEach((item, index) => {
+      total += item.price;
+
+      cartBox.innerHTML += `
+        <div style="display:flex;justify-content:space-between;
+        padding:10px;border-bottom:1px solid #222;">
+          
+          <span>${item.name} - R${item.price}</span>
+
+          <button onclick="removeItem(${index})"
+          style="background:#ff7a00;border:none;padding:5px 10px;
+          cursor:pointer;">
+            Remove
+          </button>
+
+        </div>
+      `;
+    });
+
+    cartBox.innerHTML += `
+      <h3 style="color:#ff7a00;margin-top:10px;">
+        Total: R${total}
+      </h3>
+    `;
+  }
+
+// INITIAL LOAD
+  renderCart();
+</script>
+</body>
+</html>

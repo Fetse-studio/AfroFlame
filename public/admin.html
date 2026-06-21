@@ -1,0 +1,130 @@
+<script>
+  let admin = localStorage.getItem("admin");
+
+  if (!admin) {
+    alert("Access denied. Please login first.");
+    window.location.href = "admin-login.html";
+  }
+</script>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard | AfroFlame</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #000;
+      color: #fff;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff7a00;
+      margin-top: 20px;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .box {
+      background: #111;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #222;
+      height: 500px;
+      overflow-y: auto;
+    }
+
+    h2 {
+      color: #ff7a00;
+    }
+
+    .item {
+      padding: 10px;
+      border-bottom: 1px solid #222;
+      font-size: 14px;
+    }
+
+    .tag {
+      color: #aaa;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+</h1>AfroFlame Admin Dashboard</h1>
+
+<div class="container">
+
+  <!-- ORDERS -->
+  <div class="box">
+    <h2>Orders</h2>
+    <div id="orders"></div>
+  </div>
+
+  <!-- RESERVATIONS -->
+  <div class="box">
+    <h2>Reservations</h2>
+    <div id="reservations"></div>
+  </div>
+
+</div>
+
+<button onclick="logout()" style="background:#ff9800;padding:10px;border:none;cursor:pointer;">
+  Logout
+</button>
+
+<script>
+/* ================= ORDERS ================= */
+fetch("http://localhost:3000/api/orders")
+.then(res => res.json())
+.then(data => {
+  const box = document.getElementById("orders");
+
+  data.forEach(order => {
+    box.innerHTML += `
+      <div class="item">
+        <b>${order.customer_name}</b><br>
+        <span class="tag">${order.phone}</span><br>
+        <span>R${order.total}</span><br>
+        <span class="tag">${order.created_at}</span>
+      </div>
+    `;
+  });
+});
+
+/* ================= RESERVATIONS ================= */
+fetch("http://localhost:3000/api/reservations")
+.then(res => res.json())
+.then(data => {
+  const box = document.getElementById("reservations");
+
+  data.forEach(r => {
+    box.innerHTML += `
+      <div class="item">
+        <b>${r.name}</b><br>
+        <span class="tag">${r.phone}</span><br>
+        <span>${r.date} at ${r.time}</span><br>
+        <span>Guests: ${r.guests}</span>
+      </div>
+    `;
+  });
+});
+
+function logout() {
+  localStorage.removeItem("admin");
+  window.location.href = "admin-login.html";
+}
+</script>
+
+</body>
+</html>
